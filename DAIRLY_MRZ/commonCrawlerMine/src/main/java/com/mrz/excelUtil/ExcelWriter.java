@@ -58,7 +58,8 @@ public class ExcelWriter {
             }
         }
             //最后写回磁盘
-            FileOutputStream out = new FileOutputStream("C:\\Users\\wrunv\\OneDrive\\TEMPORARY_FOLDER\\douBanRent.xls");
+//            FileOutputStream out = new FileOutputStream("C:\\Users\\wrunv\\OneDrive\\TEMPORARY_FOLDER\\douBanRent.xls");
+            FileOutputStream out = new FileOutputStream("/Users/zzz/Desktop/REDA_FLIGHT/DAILY_TEST/Book1.xls");
             wb.write(out);
             out.close();
         }
