@@ -6,10 +6,10 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class OpenSocket {
-    public static void main(String[] args) throws Exception {
-        //成功，但不断开连接
-        getInfoBySocket();
-    }
+//    public static void main(String[] args) throws Exception {
+//        //成功，但不断开连接
+//        getInfoBySocket();
+//    }w
 
     /**
      * 通过Socket访问

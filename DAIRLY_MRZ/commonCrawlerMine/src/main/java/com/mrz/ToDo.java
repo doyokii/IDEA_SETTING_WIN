@@ -2,8 +2,6 @@ package com.mrz;
 
 import com.mrz.entity.DouBanRentData;
 import com.mrz.excelUtil.ExcelWriter;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.impl.Log4JLogger;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
@@ -40,6 +38,8 @@ public class ToDo {
                 ExcelWriter.excelWriter(rowName,douBanRentData,sheet,wb);
             }else {
                 ExcelWriter.excelWriter(douBanRentData,String.valueOf(i),sheet,wb);
+//                int da = 1 ;
+//                int i1 = da / 0;
             }
         }
     }
