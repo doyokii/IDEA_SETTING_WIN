@@ -53,7 +53,9 @@ public class HandleLogFileServiceImpl implements HandleLogFileService {
         logFilesMap.keySet().stream().forEach(logType -> {
             String[] split = logFilesMap.get(logType).split(";");
             Arrays.asList(logFilesMap.get(logType).split(";")).stream().forEach(fileName -> {
-                String fileContent = readFilesByLine(filePath + netWorkIp  + "\\" + "data" + "\\" + today + "\\" + fileName, fileName,today);
+                String fileContent = readFilesByLine(filePath + netWorkIp  + "/" + "data" + "/" + today + "/" + fileName, fileName,today);
+                // windows本地调试分割符 \\
+                //                String fileContent = readFilesByLine(filePath + netWorkIp  + "\\" + "data" + "\\" + today + "\\" + fileName, fileName,today);
                 if (fileContent != null && fileContent != "") {
                     List<MonitInformation> entities = parseLogs(fileContent, logType);
                     monitorInformations.addAll(entities);
