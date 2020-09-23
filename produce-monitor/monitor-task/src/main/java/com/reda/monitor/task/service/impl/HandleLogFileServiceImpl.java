@@ -31,7 +31,7 @@ public class HandleLogFileServiceImpl implements HandleLogFileService {
     private static Logger logger = LoggerFactory.getLogger(HandleLogFileServiceImpl.class);
 
     private static final ConcurrentHashMap<String, String> logFilesMap = new ConcurrentHashMap<>(8);
-    private static final HashMap<String, String> propertiesMap = new HashMap<>();
+
 
     private static ConcurrentHashMap<String, Integer> fileLineNumMapping = new ConcurrentHashMap<>();
     private static JedisCommands jedisCommands;
@@ -53,27 +53,38 @@ public class HandleLogFileServiceImpl implements HandleLogFileService {
         logFilesMap.keySet().stream().forEach(logType -> {
             String[] split = logFilesMap.get(logType).split(";");
             Arrays.asList(logFilesMap.get(logType).split(";")).stream().forEach(fileName -> {
-                String fileContent = readFilesByLine(filePath + netWorkIp + "-data" + "\\" + "data" + "\\" + today + "\\" + fileName, fileName);
+                String fileContent = readFilesByLine(filePath + netWorkIp  + "\\" + "data" + "\\" + today + "\\" + fileName, fileName,today);
                 if (fileContent != null && fileContent != "") {
                     List<MonitInformation> entities = parseLogs(fileContent, logType);
                     monitorInformations.addAll(entities);
-                    System.out.println("当前文件" + fileName + ",解析出实体个数" + monitorInformations.size());
+                    System.out.println("当前文件" + fileName + ",解析出实体个数" + entities.size());
                 }
             });
         });
         if (monitorInformations.size() > 0) {
+
             monitorMapper.insert(monitorInformations);
         }else {
             logger.debug("未读出文件内容！");
         }
     }
 
-    private String readFilesByLine(String filePath, String fileName) {
+    /**
+     * 按行读取日志文件
+     * @param filePath 文件全限定路径
+     * @param fileName 文件名
+     * @param date     当前日期
+     * @return
+     */
+    private String readFilesByLine(String filePath, String fileName,String date) {
         StringBuilder stringBuilder = new StringBuilder();
-        if (!fileLineNumMapping.containsKey(fileName)) {
-            fileLineNumMapping.put(fileName, 1);
+        String fileKey = fileName + date;
+        //判断是否存在当前日期的文件，如果不存在设置初始行数为1，给24小时+超时时间
+        if(!jedisCommands.exists(fileKey)){
+            jedisCommands.setex(fileKey,87400,"1");
         }
-        Integer lineNum = fileLineNumMapping.get(fileName);
+
+        Integer lineNum = Integer.valueOf(jedisCommands.get(fileName + date));
 
         try {
             Integer totalLine = getTotalLines(filePath);
@@ -89,8 +100,8 @@ public class HandleLogFileServiceImpl implements HandleLogFileService {
                     stringBuilder.append(readLineVarFile(filePath, i) + "\n");
                 }
             }
-            fileLineNumMapping.remove(fileName);
-            fileLineNumMapping.put(fileName, totalLine + 1);
+            Integer restTime = Integer.valueOf(String.valueOf(jedisCommands.ttl(fileKey)));
+            jedisCommands.setex(fileKey,restTime,String.valueOf(totalLine+1));
             return stringBuilder.toString();
         } catch (Exception e) {
             logger.info("未读到文件内容，异常原因：" + e.getMessage());
@@ -150,6 +161,7 @@ public class HandleLogFileServiceImpl implements HandleLogFileService {
         Map<String, String> fileName2Type = PropertiesUtil.getProperty("application.properties", "localIp");
         try {
             netWorkIp = PropertiesUtil.getNetWorkIp();
+            logger.info("current network ip is : "+netWorkIp);
             StringBuilder stringBuilder = new StringBuilder();
             //拼接日志文件名
             // service_172.31.0.1_nginx.log

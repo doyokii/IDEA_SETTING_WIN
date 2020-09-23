@@ -88,15 +88,41 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-        <!-- 资源文件拷贝插件 -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-resources-plugin</artifactId>
-            <configuration>
-                <encoding>UTF-8</encoding>
-            </configuration>
-        </plugin>
+            <!-- 资源文件拷贝插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.3.4.RELEASE</version>
+                <configuration>
+                    <mainClass>com.reda.monitor.task.MonitorTaskApplication</mainClass>
+                    <layout>ZIP</layout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+        <!--   解决更新配置后不生效问题     -->
+<!--        <resources>-->
+<!--                <resource>-->
+<!--                    <directory>src/main/resources</directory>-->
+<!--                    <includes>-->
+<!--                        <include>**/*.html</include>-->
+<!--                        <include>/static/</include>-->
+<!--                    </includes>-->
+<!--                </resource>-->
+<!--        </resources>-->
 
         <!--        <plugins>-->
         <!--            <plugin>-->
