@@ -25,12 +25,17 @@ import java.util.stream.Stream;
 import static com.reda.monitor.task.utils.FileUtil.getTotalLines;
 import static com.reda.monitor.task.utils.FileUtil.readLineVarFile;
 
-
+/**
+ * @author : Zhuang Jialong
+ * @description : 解析日志文件
+ * @date : 2020/9/30 下午 2:29
+ * @Copyright: Copyright(c)2019 RedaFlight.com All Rights Reserved
+ */
 @Service
 public class HandleLogFileServiceImpl implements HandleLogFileService {
     private static Logger logger = LoggerFactory.getLogger(HandleLogFileServiceImpl.class);
 
-    private static final ConcurrentHashMap<String, String> logFilesMap = new ConcurrentHashMap<>(8);
+    private static final ConcurrentHashMap<String, String> logFilesMap = new ConcurrentHashMap<>();
 
 
     private static ConcurrentHashMap<String, Integer> fileLineNumMapping = new ConcurrentHashMap<>();
@@ -53,9 +58,9 @@ public class HandleLogFileServiceImpl implements HandleLogFileService {
         logFilesMap.keySet().stream().forEach(logType -> {
             String[] split = logFilesMap.get(logType).split(";");
             Arrays.asList(logFilesMap.get(logType).split(";")).stream().forEach(fileName -> {
-                String fileContent = readFilesByLine(filePath + netWorkIp  + "/" + "data" + "/" + today + "/" + fileName, fileName,today);
+//                String fileContent = readFilesByLine(filePath + netWorkIp  + "/" + "data" + "/" + today + "/" + fileName, fileName,today);
                 // windows本地调试分割符 \\
-                //                String fileContent = readFilesByLine(filePath + netWorkIp  + "\\" + "data" + "\\" + today + "\\" + fileName, fileName,today);
+                                String fileContent = readFilesByLine(filePath + netWorkIp  + "\\" + "data" + "\\" + today + "\\" + fileName, fileName,today);
                 if (fileContent != null && fileContent != "") {
                     List<MonitInformation> entities = parseLogs(fileContent, logType);
                     monitorInformations.addAll(entities);

@@ -32,11 +32,11 @@ public class TestJob  {
      */
     @Autowired
     private HandleLogFileService handleLogFileService;
-
-    @Scheduled(cron = "0/5 * * * * ?")
-    public void execute() throws JobExecutionException {
-        logger.info("===================开始执行日志解析处理任务==================={}",new Date());
-        handleLogFileService.parseLogFiles();
-        logger.info("===================结束执行日志解析处理任务==================={}",new Date());
-    }
+//
+//    @Scheduled(cron = "0/5 * * * * ?")
+//    public void execute() throws JobExecutionException {
+//        logger.info("===================开始执行日志解析处理任务==================={}",new Date());
+//        handleLogFileService.parseLogFiles();
+//        logger.info("===================结束执行日志解析处理任务==================={}",new Date());
+//    }
 }

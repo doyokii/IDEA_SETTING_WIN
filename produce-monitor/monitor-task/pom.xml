@@ -13,7 +13,6 @@
     <version>1.0-SNAPSHOT</version>
     <name>monitor-task</name>
     <description>Demo project for Spring Boot</description>
-    <packaging>jar</packaging>
 
     <properties>
         <java.version>1.8</java.version>
@@ -78,6 +77,19 @@
     </dependencies>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
+
+        <resources>
+            <resource>
+                <targetPath>${project.build.directory}/classes</targetPath>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -96,40 +108,42 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                <version>2.3.4.RELEASE</version>-->
+<!--                <configuration>-->
+<!--                    <mainClass>com.reda.monitor.task.MonitorTaskApplication</mainClass>-->
+<!--                    <layout>ZIP</layout>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>repackage</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.3.4.RELEASE</version>
-                <configuration>
-                    <mainClass>com.reda.monitor.task.MonitorTaskApplication</mainClass>
-                    <layout>ZIP</layout>
-                </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2-beta-5</version>
                 <executions>
                     <execution>
+                        <id>distro-assembly</id>
+                        <phase>package</phase>
                         <goals>
-                            <goal>repackage</goal>
+                            <goal>single</goal>
                         </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
-        <!--   解决更新配置后不生效问题     -->
-<!--        <resources>-->
-<!--                <resource>-->
-<!--                    <directory>src/main/resources</directory>-->
-<!--                    <includes>-->
-<!--                        <include>**/*.html</include>-->
-<!--                        <include>/static/</include>-->
-<!--                    </includes>-->
-<!--                </resource>-->
-<!--        </resources>-->
-
-        <!--        <plugins>-->
-        <!--            <plugin>-->
-        <!--                <groupId>org.springframework.boot</groupId>-->
-        <!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-        <!--            </plugin>-->
-        <!--        </plugins>-->
     </build>
     <repositories>
         <repository>

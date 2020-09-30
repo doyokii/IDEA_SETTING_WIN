@@ -33,7 +33,7 @@ public class TranslateLogFileJob {
     @Autowired
     private HandleLogFileService handleLogFileService;
 
-    @Scheduled(cron = "0/5 * * * * ?")
+    @Scheduled(cron = "${cron.TranslateLogFileJob}")
     public void execute() throws JobExecutionException {
         logger.info("===================开始执行日志解析处理任务==================={}",new Date());
         handleLogFileService.parseLogFiles();
