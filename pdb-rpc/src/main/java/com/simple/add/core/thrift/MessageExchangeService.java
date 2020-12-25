@@ -60,12 +60,10 @@ public class MessageExchangeService {
       send_sendMessage(message);
       return recv_sendMessage();
     }
-    //============zhuang==============
-    private ReentrantLock lock = new ReentrantLock(true);
+);
 
     public void send_sendMessage(String message) throws org.apache.thrift.TException
     {
-      lock.lock();
       sendMessage_args args = new sendMessage_args();
       args.setMessage(message);
       sendBase("sendMessage", args);
@@ -75,7 +73,6 @@ public class MessageExchangeService {
     {
       sendMessage_result result = new sendMessage_result();
       receiveBase(result, "sendMessage");
-      lock.unlock();
       if (result.isSetSuccess()) {
         return result.success;
       }
