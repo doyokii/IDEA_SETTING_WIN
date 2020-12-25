@@ -1,0 +1,33 @@
+<application>
+  <component name="ProjectManager">
+    <defaultProject>
+      <component name="BookmarkManager">
+        <bookmark url="jar://F:/JDK/jdk-8u231-windows-x64/src.zip!/java/io/FileSystem.java" description="public abstract boolean delete(File f);" line="161" />
+      </component>
+      <component name="ProjectViewState">
+        <option name="hideEmptyMiddlePackages" value="true" />
+        <option name="showExcludedFiles" value="true" />
+        <option name="showLibraryContents" value="true" />
+      </component>
+      <component name="ThriftCompiler">
+        <compilers />
+      </component>
+      <component name="masterDetails">
+        <states>
+          <state key="ProjectJDKs.UI">
+            <settings>
+              <last-edited>1.8</last-edited>
+              <splitter-proportions>
+                <option name="proportions">
+                  <list>
+                    <option value="0.2" />
+                  </list>
+                </option>
+              </splitter-proportions>
+            </settings>
+          </state>
+        </states>
+      </component>
+    </defaultProject>
+  </component>
+</application>

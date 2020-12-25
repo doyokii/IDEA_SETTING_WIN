@@ -1,0 +1,17 @@
+<templateSet group="user">
+  <template name="zjl" value="/**&#10; * @author : Zhuang Jialong&#10; * @description :&#10; * @date : $DATE$ $TIME$&#10; * @Copyright: Copyright(c)$YEAR$ RedaFlight.com All Rights Reserved&#10; */" description="annotation" toReformat="false" toShortenFQNames="true">
+    <variable name="DATE" expression="" defaultValue="date()" alwaysStopAt="false" />
+    <variable name="TIME" expression="" defaultValue="time()" alwaysStopAt="false" />
+    <variable name="YEAR" expression="" defaultValue="date(&quot;yyyy&quot;)" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="ll" value="&#10;// * @author : Zhuang Jialong  * @date : $DATE$ $TIME$             *&#10;// * ========================DIVIDING LINE========================   *&#10;// * @description :                                                  *" description="divdinglin" toReformat="false" toShortenFQNames="true">
+    <variable name="DATE" expression="" defaultValue="date()" alwaysStopAt="false" />
+    <variable name="TIME" expression="" defaultValue="time()" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+</templateSet>
