@@ -1,0 +1,21 @@
+<application>
+  <component name="CodeInsightSettings">
+    <option name="COMPLETION_CASE_SENSITIVE" value="2" />
+    <EXCLUDED_PACKAGE NAME="java.util.Calendar" />
+  </component>
+  <component name="DefaultFont">
+    <option name="FONT_SIZE" value="14" />
+    <option name="FONT_FAMILY" value="JetBrains Mono Medium" />
+    <option name="LINE_SPACING" value="1.4" />
+  </component>
+  <component name="EditorSettings">
+    <option name="USE_SOFT_WRAPS" value="CONSOLE" />
+  </component>
+  <component name="TodoConfiguration">
+    <pattern pattern="\b(todo|fixme)\b.*" />
+    <pattern pattern="\bmrztodo\b.*" />
+    <filter name="mrz">
+      <pattern index="1" />
+    </filter>
+  </component>
+</application>
